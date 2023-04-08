@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+<div class="container">
+{% block content %}
+  <h2>Upload</h2>
+  <form method="post" enctype="multipart/form-data" action="/success">
+    {% csrf_token %}
+    <input type="file" name="document">
+    <button type="submit">Upload file</button>
+    {% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show text-center my-0" role="alert">
+  <strong>{{ message }}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+ {% endfor %}
+{% endif %}
+    {% comment %} <a class="btn btn-primary" href="/success">Upload file</a> {% endcomment %}
+  </form>
+  {% if url %}
+    <p>Uploaded file: <a href="{{ url }}">{{ url }}</a></p>
+  {% endif %}
+{% endblock %}
+</div>
